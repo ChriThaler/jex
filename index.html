@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEX</title>
+<meta name="theme-color" content="#253c6e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="jex-icon-192.png">
+<link rel="apple-touch-icon" href="jex-icon-192.png">
+<style>
+  html, body { margin: 0; height: 100%; background: #253c6e; color: #fff;
+    font: 17px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; padding: 24px 16px; box-sizing: border-box; text-align: center; }
+  img { width: 112px; height: 112px; border-radius: 24px; box-shadow: 0 6px 24px rgba(0,0,0,.3); }
+  h1 { margin: 0; font-size: 24px; font-weight: 600; }
+  a.open { display: inline-block; background: #fff; color: #253c6e; text-decoration: none; font-weight: 700;
+    padding: 14px 32px; border-radius: 12px; min-height: 24px; }
+  .help { max-width: 420px; font-size: 14px; opacity: .85; }
+</style>
+</head>
+<body>
+<main>
+  <img src="jex-icon-512.png" alt="">
+  <h1>JEX Erstgespräch</h1>
+  <a class="open" id="open" href="#">Formular öffnen</a>
+  <p class="help">Am Tablet: In Chrome das Menü ⋮ öffnen und <b>„Zum Startbildschirm hinzufügen“</b> bzw. <b>„App installieren“</b> wählen.
+  Danach startet das JEX-Symbol direkt das Formular.</p>
+</main>
+<script>
+  // Web-App-URL aus Apps Script (endet auf /exec)
+  const APP_URL = 'https://script.google.com/a/macros/szf.at/s/AKfycbxUbAOy__F3qrD6qxyJOS99_RjPoKgysfTc-4APwTU7rLbwMMMDrj99ac52mbC1x3M9KQ/exec';
+
+  document.getElementById('open').href = APP_URL;
+  // Vom Startbildschirm aus gestartet → sofort zum Formular
+  if (location.search.indexOf('start') !== -1 && APP_URL.indexOf('https://') === 0) location.replace(APP_URL);
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
